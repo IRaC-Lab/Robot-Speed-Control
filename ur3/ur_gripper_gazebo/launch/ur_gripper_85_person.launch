@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Export env variable so that gazebo finds our models -->
+  <env name="GAZEBO_MODEL_PATH"
+       value="$(find ur_gripper_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  <!-- Ignore online database -->
+  <env name="GAZEBO_MODEL_DATABASE_URI"
+       value="/" />
+  <!-- Launch file parameters -->
+  <arg name="paused"     default="false"/>
+  <arg name="debug"      default="false"/>
+  <arg name="gui"        default="true"/>
+  <arg name="rate"       default="500" />
+  <arg name="world_name" default="$(find ur_gripper_gazebo)/worlds/IRAC.world" />
+  <arg name="grasp_plugin" default="true"/>
+
+  <!--Robot description and related parameter files -->
+  <arg name="robot_description_file" default="$(dirname)/inc/load_ur_gripper_85.launch.xml" doc="Launch file which populates the 'robot_description' parameter."/>
+  <arg name="ur_robot" default="ur3"/>
+  
+  <!--Person description and related parameter files -->
+  <param name="person_walking_description1" textfile="$(find ur_gripper_gazebo)/models/actor_walk1/model.sdf" />
+  <param name="person_walking_description2" textfile="$(find ur_gripper_gazebo)/models/actor_walk2/model.sdf" />
+  
+  <!-- Start up simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused"     value="$(arg paused)"/>
+    <arg name="debug"      value="$(arg debug)"/>
+    <arg name="gui"        value="$(arg gui)"/>
+  </include>
+
+  <include file="$(find ur_control)/launch/ur_controllers.launch">
+    <arg name="gripper_robotiq_85" value="true" />
+  </include>
+
+  <!-- Load urdf on the parameter server -->
+  <include file="$(arg robot_description_file)">
+    <arg name="ur_robot" value="$(arg ur_robot)"/>
+    <arg name="grasp_plugin" value="$(arg grasp_plugin)"/>
+  </include>
+  <!-- Spawn robot in gazebo (and move it upwards):
+       better initial values should be -2.355 and 1.57 but the robot does
+       something strange when unpausing it
+  -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model robot 
+              -x -1.2 -y 1.95 -z 0.801 -Y -1.57
+              -J shoulder_pan_joint 0
+              -J shoulder_lift_joint -1.57
+              -J elbow_joint 0
+              -J wrist_1_joint -1.57
+              -J wrist_2_joint 0
+              -J wrist_3_joint 0
+              -unpause"
+        output="screen" />
+        
+  <node name="spawn_sdf1" pkg="gazebo_ros" type="spawn_model" args="-sdf -model actor1 -param person_walking_description1 -x 1 -y -1 -z 0" output="screen" />
+  <node name="spawn_sdf2" pkg="gazebo_ros" type="spawn_model" args="-sdf -model actor2 -param person_walking_description2 -x -1 -y -2 -z 0" output="screen" />
+
+</launch>
