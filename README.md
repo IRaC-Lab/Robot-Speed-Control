@@ -34,7 +34,7 @@
 1. **Installing Dependencies**:
 
     ```bash
-    cd ~/catkin_ws/src/Robot-Speed-Control
+    cd ~/catkin_ws
     rosinstall ~/catkin_ws/src/Robot-Speed-Control /opt/ros/noetic src/Robot-Speed-Control/ur3/dependencies.rosinstall
     sudo apt-get update
     rosdep fix-permissions
@@ -158,7 +158,7 @@ python3 predict.py --conf 0.7
 ```bash
 rosrun realsense2_camera align_depth_to_color.py
 ```
-    
+
 ```bash
 rosrun realsense2_camera depth_distance_seg.py
 ```
