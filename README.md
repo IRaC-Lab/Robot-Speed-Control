@@ -35,7 +35,7 @@
 
     ```bash
     cd ~/catkin_ws/src/Robot-Speed-Control
-    rosinstall ~/catkin_ws/src/Robot-Speed-Control /opt/ros/noetic src/Robot-Speed-Control/ur3-noetic-devel/dependencies.rosinstall
+    rosinstall ~/catkin_ws/src/Robot-Speed-Control /opt/ros/noetic src/Robot-Speed-Control/ur3/dependencies.rosinstall
     sudo apt-get update
     rosdep fix-permissions
     rosdep update
@@ -88,7 +88,7 @@
 1. **Check Version of Package**:
 
     ```bash
-    cd ~/catkin_ws/src/Robot-Speed-Control/realsense-ros-ros1-legacy
+    cd ~/catkin_ws/src/Robot-Speed-Control/realsense-ros
     git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
     ```
 
@@ -109,7 +109,7 @@
 ## Yolov5 Install
 
 ```bash
-cd ~/catkin_ws/src/Robot-Speed-Control/yolov5-master
+cd ~/catkin_ws/src/Robot-Speed-Control/yolov5
 pip install -r requirements.txt
 ```
 **Segmentation Model: (https://github.com/ultralytics/yolov5/releases/v7.0)**
