@@ -73,7 +73,7 @@
 
   <!-- Gripper -->
 
-  <xacro:arg name="grasp_plugin" default="false" />
+  <xacro:arg name="grasp_plugin" default="true" />
 
   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro" />
   
@@ -182,12 +182,12 @@
 
   <!-- Gazebo grasping plugin -->
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
-   <xacro:sensor_d435 parent="world" name="camera1">
+   <xacro:sensor_d435 parent="world" name="camera1" topics_ns="camera1">
         <origin xyz="-1.0 -0.6 1.2" rpy="0 0.4 0.97"/>
     </xacro:sensor_d435>
     
   <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
-    <xacro:sensor_d435 parent="world" name="camera2">
+    <xacro:sensor_d435 parent="world" name="camera2" topics_ns="camera2">
         <origin xyz="-0.65 -1 1.2" rpy="0 0.4 0.48"/>
     </xacro:sensor_d435>
 </robot>
