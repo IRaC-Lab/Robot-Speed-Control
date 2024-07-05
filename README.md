@@ -28,7 +28,6 @@
     git clone https://github.com/IRaC-Lab/Robot-Speed-Control.git
     ```
 
-
 ## UR3 Package Install
 
 1. **Installing Dependencies**:
@@ -42,6 +41,13 @@
     rosdep install --from-paths src --ignore-src --rosdistro=noetic -y
     ```
 
+2. **Build the packages**
+
+```bash
+cd ~/catkin_ws/src/
+catkin_make
+```
+    
 ## IntelRealsense Package Install
 
 **Step 1: Install the latest Intel® RealSense™ SDK 2.0**
@@ -102,8 +108,9 @@
 3. **Build the packages**:
 
     ```bash
-    catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
-    catkin_make install
+    cd ~/catkin_ws
+    catkin_make --only-pkg-with-deps realsense2_camera -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
+    catkin_make --only-pkg-with-deps realsense2_camera install
     ```
 
 ## Yolov5 Install
@@ -113,14 +120,6 @@ cd ~/catkin_ws/src/Robot-Speed-Control/yolov5
 pip install -r requirements.txt
 ```
 **Segmentation Model: (https://github.com/ultralytics/yolov5/releases/v7.0)**
-
-
-## Build the packages
-
-```bash
-cd ~/catkin_ws/src/
-catkin_make
-```
 
 
 ## Running Gazebo and MoveIt
