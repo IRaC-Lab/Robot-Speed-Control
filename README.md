@@ -44,7 +44,7 @@
 2. **Build the packages**
 
 ```bash
-cd ~/catkin_ws/src/
+cd ~/catkin_ws
 catkin_make
 ```
     
@@ -113,7 +113,7 @@ catkin_make
     catkin_make --only-pkg-with-deps realsense2_camera install
     ```
 
-## Yolov5 Install
+## YOLOv5 Install
 
 ```bash
 cd ~/catkin_ws/src/Robot-Speed-Control/yolov5
