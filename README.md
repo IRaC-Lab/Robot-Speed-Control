@@ -2,6 +2,9 @@
  Simulation Implementation for "Edge AI-Driven Multi-Camera System for Adaptive Robot Speed Control in Safety-Critical Environments"
 
 
+https://github.com/user-attachments/assets/c9e5babf-c167-4745-998f-f60403effa56
+
+
 ## Packages
 
 ### 1. UR3 (Noetic Devel)
